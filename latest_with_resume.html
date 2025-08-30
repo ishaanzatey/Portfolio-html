@@ -50,16 +50,15 @@
     }
 
     .nav-container {
-      max-width: 1024px;
-      margin: 0 auto;
-      padding: 0 22px;
+      width: 100%;
+      padding: 0 80px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .logo {
-      font-size: 21px;
+      font-size: 28px;
       font-weight: 600;
       color: var(--primary-color);
       text-decoration: none;
@@ -71,6 +70,8 @@
       list-style: none;
       gap: 32px;
     }
+
+
 
     .nav-links a {
       text-decoration: none;
@@ -124,7 +125,7 @@
     }
 
     .hero-eyebrow {
-      font-size: 21px;
+      font-size: 50px;
       line-height: 1.19048;
       font-weight: 600;
       letter-spacing: 0.011em;
@@ -133,7 +134,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(48px, 8vw, 80px);
+      font-size: clamp(36px, 6vw, 60px);
       line-height: 1.05;
       font-weight: 600;
       letter-spacing: -0.015em;
@@ -633,8 +634,8 @@
     .modal-content {
       background: var(--white);
       border-radius: 24px;
-      max-width: 800px;
-      width: 100%;
+      width: 95vw;
+      max-width: 1400px;
       max-height: 90vh;
       overflow-y: auto;
       box-shadow: var(--modal-shadow);
@@ -817,7 +818,8 @@
 
     /* Resume Modal Styles */
     .resume-modal .modal-content {
-      max-width: 900px;
+      width: 98vw;
+      max-width: 1600px;
       max-height: 95vh;
     }
 
@@ -901,6 +903,8 @@
       }
     }
 
+
+
     @media (max-width: 734px) {
       .nav-links {
         display: none;
@@ -956,8 +960,8 @@
       }
 
       .modal-content {
-        margin: 10px;
-        max-width: calc(100% - 20px);
+        width: calc(100vw - 20px);
+        max-width: calc(100vw - 20px);
         border-radius: 16px;
       }
 
@@ -1313,7 +1317,7 @@
       ecommerce: {
         title: 'Cloud-Native E-Commerce Platform',
         category: 'E-Commerce',
-        image: '🛒',
+        image: 'images/ecommerce-icon.png',
         tags: ['Kubernetes', 'Docker', 'Microservices', 'CI/CD', 'AWS'],
         description: 'A fully containerized e-commerce platform built with microservices architecture, featuring automated deployment pipelines and scalable infrastructure. The platform handles high traffic loads while maintaining optimal performance and reliability.',
         features: [
@@ -1334,7 +1338,7 @@
       automation: {
         title: 'Automated Infrastructure Monitoring',
         category: 'Automation',
-        image: '⚙️',
+        image: 'images/automation-dashboard.png',
         tags: ['Python', 'Rundeck', 'Automation', 'Monitoring', 'API'],
         description: 'An intelligent monitoring system that proactively tracks server health, disk usage, and system performance across 160+ Linux servers. Features automated alerting and self-healing capabilities.',
         features: [
@@ -1355,7 +1359,7 @@
       analytics: {
         title: 'Real-time Performance Dashboards',
         category: 'Analytics',
-        image: '📊',
+        image: 'images/analytics-dashboard1.png',
         tags: ['Dynatrace', 'Grafana', 'Kibana', 'Analytics', 'Monitoring'],
         description: 'Comprehensive performance monitoring dashboards providing real-time insights into system health, application performance, and infrastructure metrics. Enables proactive incident management and optimization.',
         features: [
@@ -1426,7 +1430,9 @@
       modalTitle.textContent = project.title;
       
       modalBody.innerHTML = `
-        <div class="project-detail-image">${project.image}</div>
+        <div class="project-detail-image">
+          <img src="${project.image}" alt="${project.title}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 64px; color: var(--secondary-color);\'>${project.category === 'E-Commerce' ? '🛒' : project.category === 'Automation' ? '⚙️' : '📊'}</div>'">
+        </div>
         <div class="project-tags">
           ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
         </div>

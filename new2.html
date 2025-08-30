@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ishan Zatey - Systems Engineer</title>
   <style>
+    /* Basic resets and root colors */
     * {
       margin: 0;
       padding: 0;
@@ -22,11 +23,11 @@
       --glass-bg: rgba(255, 255, 255, 0.8);
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+      --modal-shadow: 0 25px 100px rgba(0, 0, 0, 0.3);
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
-        system-ui, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
       line-height: 1.47059;
       color: var(--primary-color);
       overflow-x: hidden;
@@ -49,16 +50,15 @@
     }
 
     .nav-container {
-      max-width: 1024px;
-      margin: 0 auto;
-      padding: 0 22px;
+      width: 100%;
+      padding: 0 80px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .logo {
-      font-size: 21px;
+      font-size: 28px;
       font-weight: 600;
       color: var(--primary-color);
       text-decoration: none;
@@ -71,18 +71,37 @@
       gap: 32px;
     }
 
+
+
     .nav-links a {
       text-decoration: none;
       color: var(--primary-color);
       font-size: 17px;
       font-weight: 400;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
       position: relative;
       letter-spacing: -0.022em;
+      cursor: pointer;
     }
 
     .nav-links a:hover {
       color: var(--accent-color);
+    }
+
+    .nav-links a.active {
+      color: var(--accent-color);
+    }
+
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background: var(--accent-color);
+      border-radius: 50%;
     }
 
     /* Hero Section */
@@ -106,7 +125,7 @@
     }
 
     .hero-eyebrow {
-      font-size: 21px;
+      font-size: 50px;
       line-height: 1.19048;
       font-weight: 600;
       letter-spacing: 0.011em;
@@ -115,7 +134,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(48px, 8vw, 80px);
+      font-size: clamp(36px, 6vw, 60px);
       line-height: 1.05;
       font-weight: 600;
       letter-spacing: -0.015em;
@@ -250,12 +269,12 @@
     }
 
     .profile-photo {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      margin-bottom: 20px;
+      border-radius: 18px;
+      border: none;
+      display: block;
     }
 
     .profile-fallback {
@@ -270,6 +289,10 @@
       font-weight: 600;
       letter-spacing: 0.5px;
       opacity: 0.9;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .about-image::before {
@@ -281,6 +304,8 @@
       bottom: 0;
       background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
       animation: shimmer 4s infinite;
+      pointer-events: none;
+      border-radius: 18px;
     }
 
     .about-text h3 {
@@ -299,6 +324,36 @@
       letter-spacing: 0.012em;
       color: var(--dark-gray);
       margin-bottom: 20px;
+    }
+
+    /* Resume Button in About Section - Minimal Design */
+    .resume-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: transparent;
+      color: var(--accent-color);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(0, 122, 255, 0.2);
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .resume-button:hover {
+      background: rgba(0, 122, 255, 0.05);
+      border-color: var(--accent-color);
+      transform: translateY(-1px);
+    }
+
+    .resume-button-icon {
+      font-size: 16px;
+      opacity: 0.8;
     }
 
     .stats {
@@ -337,9 +392,12 @@
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
       margin-top: 60px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .skill-card {
@@ -379,7 +437,7 @@
     .skill-icon-fallback {
       font-size: 48px;
       color: var(--white);
-      display: block;
+      display: none;
     }
 
     .skill-card h4 {
@@ -418,6 +476,7 @@
       transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       box-shadow: var(--shadow);
       border: 1px solid rgba(0, 0, 0, 0.04);
+      cursor: pointer;
     }
 
     .project-card:hover {
@@ -434,7 +493,6 @@
       align-items: center;
       justify-content: center;
       color: var(--secondary-color);
-      position: relative;
       flex-direction: column;
     }
 
@@ -445,33 +503,19 @@
       display: block;
     }
 
-    .project-fallback {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      color: var(--secondary-color);
-    }
-
-    .project-emoji-fallback {
-      font-size: 56px;
-      margin-bottom: 8px;
-    }
-
-    .project-category {
-      font-size: 14px;
-      font-weight: 500;
-      opacity: 0.9;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--white);
+    .project-overlay {
       position: absolute;
       bottom: 10px;
       left: 10px;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0,0,0,0.5);
       padding: 3px 10px;
       border-radius: 12px;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.9;
     }
 
     .project-content {
@@ -503,6 +547,7 @@
       font-weight: 400;
       letter-spacing: -0.022em;
       transition: color 0.3s ease;
+      pointer-events: none;
     }
 
     .project-link:hover {
@@ -562,7 +607,269 @@
       color: var(--secondary-color);
     }
 
-    /* Animations */
+    /* Modal Styles - Apple-inspired */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .modal.active {
+      display: flex;
+      opacity: 1;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: var(--white);
+      border-radius: 24px;
+      width: 95vw;
+      max-width: 1400px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--modal-shadow);
+      transform: scale(0.8) translateY(50px);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      /* Hide scrollbar but keep scroll functionality */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+    }
+
+    /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+    .modal-content::-webkit-scrollbar {
+      display: none;
+    }
+
+    .modal.active .modal-content {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      position: sticky;
+      top: 0;
+      background: var(--white);
+      border-radius: 24px 24px 0 0;
+      padding: 20px 30px;
+      border-bottom: 1px solid var(--medium-gray);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      z-index: 10;
+    }
+
+    .modal-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin: 0;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--medium-gray);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 18px;
+      color: var(--dark-gray);
+    }
+
+    .modal-close:hover {
+      background: var(--dark-gray);
+      color: var(--white);
+      transform: scale(1.1);
+    }
+
+    .modal-body {
+      padding: 40px;
+    }
+
+    .project-detail-image {
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(135deg, var(--light-gray), var(--medium-gray));
+      border-radius: 18px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      color: var(--secondary-color);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-detail-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .project-tag {
+      background: var(--accent-color);
+      color: var(--white);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .project-description {
+      font-size: 19px;
+      line-height: 1.5;
+      color: var(--dark-gray);
+      margin-bottom: 30px;
+    }
+
+    .project-features {
+      margin-bottom: 30px;
+    }
+
+    .project-features h4 {
+      font-size: 21px;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .project-features ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .project-features li {
+      padding: 8px 0;
+      font-size: 17px;
+      color: var(--dark-gray);
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .project-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--medium-gray);
+    }
+
+    .project-link-btn {
+      padding: 12px 24px;
+      background: var(--accent-color);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-link-btn:hover {
+      background: #0056cc;
+      transform: translateY(-2px);
+    }
+
+    .project-link-btn.secondary {
+      background: transparent;
+      color: var(--accent-color);
+      border: 1px solid var(--accent-color);
+    }
+
+    .project-link-btn.secondary:hover {
+      background: var(--accent-color);
+      color: var(--white);
+    }
+
+    /* Resume Modal Styles */
+    .resume-modal .modal-content {
+      width: 98vw;
+      max-width: 1600px;
+      max-height: 95vh;
+    }
+
+    .resume-viewer {
+      width: 100%;
+      height: 70vh;
+      border: none;
+      border-radius: 12px;
+      background: var(--light-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .resume-placeholder {
+      text-align: center;
+      color: var(--secondary-color);
+      font-size: 18px;
+    }
+
+    .resume-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid var(--medium-gray);
+    }
+
+    .download-btn {
+      padding: 12px 24px;
+      background: var(--accent-color);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .download-btn:hover {
+      background: #0056cc;
+      transform: translateY(-2px);
+    }
+
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -589,7 +896,14 @@
       .container {
         padding: 0 22px;
       }
+
+      .modal-content {
+        margin: 20px;
+        max-width: calc(100% - 40px);
+      }
     }
+
+
 
     @media (max-width: 734px) {
       .nav-links {
@@ -644,9 +958,40 @@
       .section-header {
         margin-bottom: 50px;
       }
+
+      .modal-content {
+        width: calc(100vw - 20px);
+        max-width: calc(100vw - 20px);
+        border-radius: 16px;
+      }
+
+      .modal-header {
+        padding: 16px 20px;
+        border-radius: 16px 16px 0 0;
+      }
+
+      .modal-body {
+        padding: 20px;
+      }
+
+      .modal-title {
+        font-size: 24px;
+      }
+
+      .project-links {
+        flex-direction: column;
+      }
+
+      .resume-viewer {
+        height: 50vh;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
     }
 
-    /* Scroll animations */
     .fade-in {
       opacity: 0;
       transform: translateY(30px);
@@ -659,18 +1004,17 @@
     }
   </style>
 </head>
-
 <body>
   <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="#" class="logo">Ishan Zatey</a>
       <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Expertise</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#home" data-section="home">Home</a></li>
+        <li><a href="#about" data-section="about">About</a></li>
+        <li><a href="#skills" data-section="skills">Expertise</a></li>
+        <li><a href="#projects" data-section="projects">Projects</a></li>
+        <li><a href="#contact" data-section="contact">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -728,6 +1072,10 @@
             My approach combines technical excellence with operational efficiency, always focusing on
             minimizing downtime and optimizing system performance.
           </p>
+          <button class="resume-button" onclick="openResumeModal()">
+            <span class="resume-button-icon">📄</span>
+            View Resume
+          </button>
         </div>
       </div>
       <div class="stats fade-in">
@@ -760,6 +1108,11 @@
       <div class="skills-grid">
         <div class="skill-card fade-in">
           <div class="skill-image">
+            <img
+              src="images/infrastructure-icon.png"
+              alt="Infrastructure & Automation"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            />
             <div class="skill-icon-fallback">🖥️</div>
           </div>
           <h4>Infrastructure & Automation</h4>
@@ -767,6 +1120,11 @@
         </div>
         <div class="skill-card fade-in">
           <div class="skill-image">
+            <img
+              src="images/cloud-icon.png"
+              alt="Cloud & Containers"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            />
             <div class="skill-icon-fallback">☁️</div>
           </div>
           <h4>Cloud & Containers</h4>
@@ -774,6 +1132,11 @@
         </div>
         <div class="skill-card fade-in">
           <div class="skill-image">
+            <img
+              src="images/monitoring-icon.png"
+              alt="Monitoring & Observability"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            />
             <div class="skill-icon-fallback">📊</div>
           </div>
           <h4>Monitoring & Observability</h4>
@@ -781,6 +1144,11 @@
         </div>
         <div class="skill-card fade-in">
           <div class="skill-image">
+            <img
+              src="images/devops-icon.png"
+              alt="DevOps & CI/CD"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            />
             <div class="skill-icon-fallback">🔄</div>
           </div>
           <h4>DevOps & CI/CD</h4>
@@ -799,17 +1167,16 @@
         <p class="section-subtitle">Key projects showcasing technical expertise and problem-solving capabilities.</p>
       </div>
       <div class="projects-grid">
-        <div class="project-card fade-in">
+        <div class="project-card fade-in" onclick="openProjectModal('ecommerce')">
           <div class="project-image">
             <img
-              src="images/ecommerce-architecture.png"
-              alt="Cloud-Native E-Commerce Architecture"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              src="images/ecommerce-icon.png"
+              alt="E-Commerce Icon"
+              onerror="this.style.display='none';"
             />
-            <div class="project-fallback">
-              <div class="project-emoji-fallback">🛍️</div>
+            <div class="project-overlay">
+              <div class="project-category">E-Commerce</div>
             </div>
-            <div class="project-category">E-Commerce</div>
           </div>
           <div class="project-content">
             <h4>Cloud-Native E-Commerce Platform</h4>
@@ -820,17 +1187,16 @@
             <a href="#" class="project-link">View details</a>
           </div>
         </div>
-        <div class="project-card fade-in">
+        <div class="project-card fade-in" onclick="openProjectModal('automation')">
           <div class="project-image">
             <img
-              src="images/automation-dashboard.png"
-              alt="Automated Infrastructure Monitoring"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              src="images/automation-icon.png"
+              alt="Automation Icon"
+              onerror="this.style.display='none';"
             />
-            <div class="project-fallback">
-              <div class="project-emoji-fallback">🔧</div>
+            <div class="project-overlay">
+              <div class="project-category">Automation</div>
             </div>
-            <div class="project-category">Automation</div>
           </div>
           <div class="project-content">
             <h4>Automated Infrastructure Monitoring</h4>
@@ -841,17 +1207,16 @@
             <a href="#" class="project-link">View details</a>
           </div>
         </div>
-        <div class="project-card fade-in">
+        <div class="project-card fade-in" onclick="openProjectModal('analytics')">
           <div class="project-image">
             <img
-              src="images/analytics-dashboard.png"
-              alt="Real-time Performance Dashboards"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              src="images/analytics-icon.png"
+              alt="Analytics Icon"
+              onerror="this.style.display='none';"
             />
-            <div class="project-fallback">
-              <div class="project-emoji-fallback">📈</div>
+            <div class="project-overlay">
+              <div class="project-category">Analytics</div>
             </div>
-            <div class="project-category">Analytics</div>
           </div>
           <div class="project-content">
             <h4>Real-time Performance Dashboards</h4>
@@ -885,11 +1250,11 @@
             <span class="contact-icon">📞</span>
             <span>+91 9284246581</span>
           </a>
-          <a href="https://linkedin.com/in/ishanzatey" class="contact-item" target="_blank">
+          <a href="#" class="contact-item">
             <span class="contact-icon">🔗</span>
             <span>LinkedIn</span>
           </a>
-          <a href="https://github.com/ishanzatey" class="contact-item" target="_blank">
+          <a href="#" class="contact-item">
             <span class="contact-icon">💻</span>
             <span>GitHub</span>
           </a>
@@ -898,7 +1263,146 @@
     </div>
   </section>
 
+  <!-- Project Modal -->
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">Project Details</h3>
+        <button class="modal-close" onclick="closeModal('projectModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Dynamic content will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Resume Modal -->
+  <div id="resumeModal" class="modal resume-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Resume - Ishan Zatey</h3>
+        <button class="modal-close" onclick="closeModal('resumeModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="resume-viewer">
+          <div class="resume-placeholder">
+            <h3>📄 Resume Preview</h3>
+            <p>Systems Engineer | Site Reliability Engineer</p>
+            <br>
+            <p><strong>Experience:</strong></p>
+            <p>• CGI - Systems Engineer (Current)</p>
+            <p>• 3.8 years in infrastructure management</p>
+            <p>• 160+ Linux servers automated</p>
+            <br>
+            <p><strong>Skills:</strong></p>
+            <p>• Infrastructure & Automation</p>
+            <p>• Cloud & Containers</p>
+            <p>• Monitoring & Observability</p>
+            <p>• DevOps & CI/CD</p>
+          </div>
+        </div>
+        <div class="resume-actions">
+          <button class="download-btn" onclick="downloadResume()">
+            <span>⬇️</span>
+            Download PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Project data
+    const projectData = {
+      ecommerce: {
+        title: 'Cloud-Native E-Commerce Platform',
+        category: 'E-Commerce',
+        image: 'images/ecommerce-icon.png',
+        tags: ['Kubernetes', 'Docker', 'Microservices', 'CI/CD', 'AWS'],
+        description: 'A fully containerized e-commerce platform built with microservices architecture, featuring automated deployment pipelines and scalable infrastructure. The platform handles high traffic loads while maintaining optimal performance and reliability.',
+        features: [
+          'Containerized microservices architecture using Docker and Kubernetes',
+          'Automated CI/CD pipeline with Jenkins and GitLab',
+          'Multi-stage deployment with staging and production environments',
+          '80% reduction in Docker image size through optimization',
+          '50% faster deployment times with parallel processing',
+          'Auto-scaling based on traffic patterns and resource utilization',
+          'Comprehensive monitoring and logging with Prometheus and Grafana',
+          'Secure API gateway with rate limiting and authentication'
+        ],
+        links: [
+          { text: 'View GitHub', url: '#', icon: '💻' },
+          { text: 'Live Demo', url: '#', icon: '🚀' }
+        ]
+      },
+      automation: {
+        title: 'Automated Infrastructure Monitoring',
+        category: 'Automation',
+        image: 'images/automation-dashboard.png',
+        tags: ['Python', 'Rundeck', 'Automation', 'Monitoring', 'API'],
+        description: 'An intelligent monitoring system that proactively tracks server health, disk usage, and system performance across 160+ Linux servers. Features automated alerting and self-healing capabilities.',
+        features: [
+          'Python-based monitoring agents across 160+ Linux servers',
+          'Real-time disk usage monitoring with predictive analytics',
+          'Automated alert system via API and SMTP notifications',
+          'Integration with Rundeck for scheduled health checks',
+          'Self-healing capabilities for common system issues',
+          '60% reduction in manual operational effort',
+          'Custom dashboards for infrastructure visibility',
+          'Historical data analysis and trend reporting'
+        ],
+        links: [
+          { text: 'View Code', url: '#', icon: '💻' },
+          { text: 'Documentation', url: '#', icon: '📚' }
+        ]
+      },
+      analytics: {
+        title: 'Real-time Performance Dashboards',
+        category: 'Analytics',
+        image: 'images/analytics-dashboard1.png',
+        tags: ['Dynatrace', 'Grafana', 'Kibana', 'Analytics', 'Monitoring'],
+        description: 'Comprehensive performance monitoring dashboards providing real-time insights into system health, application performance, and infrastructure metrics. Enables proactive incident management and optimization.',
+        features: [
+          'Real-time performance monitoring with Dynatrace integration',
+          'Custom Grafana dashboards for infrastructure metrics',
+          'Log analysis and visualization using Kibana and ELK Stack',
+          'Automated alerting for performance anomalies',
+          '40% reduction in Mean Time to Recovery (MTTR)',
+          'Predictive analytics for capacity planning',
+          'Cross-platform monitoring for hybrid environments',
+          'Executive reporting with KPI tracking and SLA compliance'
+        ],
+        links: [
+          { text: 'Dashboard Demo', url: '#', icon: '📈' },
+          { text: 'Architecture', url: '#', icon: '🏗️' }
+        ]
+      }
+    };
+
+    // Navigation functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+      const sections = document.querySelectorAll('.section');
+
+      // Update active navigation on scroll
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          if (window.scrollY >= sectionTop) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('data-section') === current) {
+            link.classList.add('active');
+          }
+        });
+      });
+    });
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -915,11 +1419,91 @@
       });
     });
 
+    // Modal functionality
+    function openProjectModal(projectId) {
+      const modal = document.getElementById('projectModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      
+      const project = projectData[projectId];
+      
+      modalTitle.textContent = project.title;
+      
+      modalBody.innerHTML = `
+        <div class="project-detail-image">
+          <img src="${project.image}" alt="${project.title}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 64px; color: var(--secondary-color);\'>${project.category === 'E-Commerce' ? '🛒' : project.category === 'Automation' ? '⚙️' : '📊'}</div>'">
+        </div>
+        <div class="project-tags">
+          ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+        </div>
+        <p class="project-description">${project.description}</p>
+        <div class="project-features">
+          <h4>Key Features & Achievements:</h4>
+          <ul>
+            ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+          </ul>
+        </div>
+        <div class="project-links">
+          ${project.links.map(link => `
+            <a href="${link.url}" class="project-link-btn">
+              <span>${link.icon}</span>
+              ${link.text}
+            </a>
+          `).join('')}
+        </div>
+      `;
+      
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function openResumeModal() {
+      const modal = document.getElementById('resumeModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function downloadResume() {
+        const link = document.createElement("a");
+        link.href = "assets/Ishan_Zate_Resume.pdf";  // Path to your PDF file
+        link.download = "Ishan_Zate_Resume.pdf";    // Filename for the downloaded file
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    // Close modal when clicking outside
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('modal')) {
+        e.target.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const activeModal = document.querySelector('.modal.active');
+        if (activeModal) {
+          activeModal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      }
+    });
+
     // Navbar shrink on scroll
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 80) {
         navbar.style.padding = '6px 0';
+        navbar.style.background = 'rgba(251, 251, 253, 0.98)';
+      } else {
+        navbar.style.padding = '12px 0';
         navbar.style.background = 'rgba(251, 251, 253, 0.94)';
       }
     });
@@ -985,7 +1569,4 @@
     }
   </script>
 </body>
-</html>253, 0.98)';
-      } else {
-        navbar.style.padding = '12px 0';
-        navbar.style.background = 'rgba(251, 251,
+</html>

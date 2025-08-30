@@ -50,16 +50,15 @@
     }
 
     .nav-container {
-      max-width: 1024px;
-      margin: 0 auto;
-      padding: 0 22px;
+      width: 100%;
+      padding: 0 80px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .logo {
-      font-size: 21px;
+      font-size: 28px;
       font-weight: 600;
       color: var(--primary-color);
       text-decoration: none;
@@ -71,6 +70,8 @@
       list-style: none;
       gap: 32px;
     }
+
+
 
     .nav-links a {
       text-decoration: none;
@@ -124,7 +125,7 @@
     }
 
     .hero-eyebrow {
-      font-size: 21px;
+      font-size: 50px;
       line-height: 1.19048;
       font-weight: 600;
       letter-spacing: 0.011em;
@@ -133,7 +134,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(48px, 8vw, 80px);
+      font-size: clamp(36px, 6vw, 60px);
       line-height: 1.05;
       font-weight: 600;
       letter-spacing: -0.015em;
@@ -325,33 +326,34 @@
       margin-bottom: 20px;
     }
 
-    /* Resume Button in About Section */
+    /* Resume Button in About Section - Minimal Design */
     .resume-button {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 22px;
-      background: var(--accent-color);
-      color: var(--white);
+      gap: 6px;
+      padding: 8px 16px;
+      background: transparent;
+      color: var(--accent-color);
       text-decoration: none;
-      border-radius: 12px;
-      font-size: 17px;
-      font-weight: 500;
-      letter-spacing: -0.022em;
-      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(0, 122, 255, 0.2);
       cursor: pointer;
       margin-top: 20px;
     }
 
     .resume-button:hover {
-      background: #0056cc;
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
+      background: rgba(0, 122, 255, 0.05);
+      border-color: var(--accent-color);
+      transform: translateY(-1px);
     }
 
     .resume-button-icon {
-      font-size: 20px;
+      font-size: 16px;
+      opacity: 0.8;
     }
 
     .stats {
@@ -390,9 +392,12 @@
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
       margin-top: 60px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .skill-card {
@@ -629,14 +634,22 @@
     .modal-content {
       background: var(--white);
       border-radius: 24px;
-      max-width: 800px;
-      width: 100%;
+      width: 95vw;
+      max-width: 1400px;
       max-height: 90vh;
       overflow-y: auto;
       box-shadow: var(--modal-shadow);
       transform: scale(0.8) translateY(50px);
       transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       position: relative;
+      /* Hide scrollbar but keep scroll functionality */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+    }
+
+    /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+    .modal-content::-webkit-scrollbar {
+      display: none;
     }
 
     .modal.active .modal-content {
@@ -805,7 +818,8 @@
 
     /* Resume Modal Styles */
     .resume-modal .modal-content {
-      max-width: 900px;
+      width: 98vw;
+      max-width: 1600px;
       max-height: 95vh;
     }
 
@@ -889,6 +903,8 @@
       }
     }
 
+
+
     @media (max-width: 734px) {
       .nav-links {
         display: none;
@@ -944,8 +960,8 @@
       }
 
       .modal-content {
-        margin: 10px;
-        max-width: calc(100% - 20px);
+        width: calc(100vw - 20px);
+        max-width: calc(100vw - 20px);
         border-radius: 16px;
       }
 
@@ -968,6 +984,11 @@
 
       .resume-viewer {
         height: 50vh;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+        max-width: 100%;
       }
     }
 
@@ -1001,12 +1022,11 @@
   <!-- Hero Section -->
   <section id="home" class="hero">
     <div class="hero-content">
-      <div class="hero-eyebrow">Systems Engineer</div>
-      <h1>Think different.<br />Build reliable.</h1>
-      <div class="hero-subtitle">Engineered for excellence.</div>
+      <div class="hero-eyebrow">DevOps & SRE Specialist</div>
+      <h2>Think different.<br />Build reliable.</h2>
+      <div class="hero-subtitle">Engineering for reliability</div>Cloud & Containers
       <p class="hero-description">
-        3.8 years of experience ensuring high availability, stability, and performance of enterprise infrastructure.
-        Specializing in automation, observability, and incident management.
+        ⚡ 3.8 years of experience managing and optimizing enterprise infrastructure, ensuring high availability, stability, and performance. My expertise lies in automation, observability, and incident management, where I design resilient systems, streamline operations, and embed monitoring for proactive reliability.
       </p>
       <a href="#about" class="cta-button">Discover my work</a>
       <a href="#contact" class="cta-button cta-secondary">Get in touch</a>
@@ -1043,13 +1063,13 @@
             engineering, site reliability, and DevOps practices.
           </p>
           <p>
-            Currently working as a Systems Engineer at CGI, I've successfully automated operational
-            workflows across 160+ Linux servers, designed real-time monitoring dashboards, and led
+            I've successfully automated operational workflows across 160+ Linux servers, 
+            designed real-time monitoring dashboards, and led
             resolution efforts during high-severity incidents.
           </p>
           <p>
-            My approach combines technical excellence with operational efficiency, always focusing on
-            minimizing downtime and optimizing system performance.
+            My approach blends technical excellence with operational efficiency, consistently 
+            optimizing system performance and enhancing reliability at scale
           </p>
           <button class="resume-button" onclick="openResumeModal()">
             <span class="resume-button-icon">📄</span>
@@ -1229,12 +1249,12 @@
             <span class="contact-icon">📞</span>
             <span>+91 9284246581</span>
           </a>
-          <a href="#" class="contact-item">
+          <a href="https://www.linkedin.com/in/ishan-zatey/" class="contact-item">
             <span class="contact-icon">🔗</span>
             <span>LinkedIn</span>
           </a>
-          <a href="#" class="contact-item">
-            <span class="contact-icon">💻</span>
+          <a href="https://github.com/ishaanzatey" class="contact-item">
+            <span class="contact-icon">😺</span>
             <span>GitHub</span>
           </a>
         </div>
@@ -1269,15 +1289,17 @@
             <p>Systems Engineer | Site Reliability Engineer</p>
             <br>
             <p><strong>Experience:</strong></p>
-            <p>• CGI - Systems Engineer (Current)</p>
+            <p>• Accenture - Software Analyst (Oct 2021 - Jul 2025)</p>
+            <p>• CGI - Systems Engineer (Jul 2025 - Current)</p>
             <p>• 3.8 years in infrastructure management</p>
             <p>• 160+ Linux servers automated</p>
             <br>
             <p><strong>Skills:</strong></p>
             <p>• Infrastructure & Automation</p>
             <p>• Cloud & Containers</p>
-            <p>• Monitoring & Observability</p>
             <p>• DevOps & CI/CD</p>
+            <p>• Monitoring & Observability</p>
+            <p>• Site Reliability & Incident Management</p>
           </div>
         </div>
         <div class="resume-actions">
@@ -1296,7 +1318,7 @@
       ecommerce: {
         title: 'Cloud-Native E-Commerce Platform',
         category: 'E-Commerce',
-        image: '🛒',
+        image: 'images/ecommerce-icon.png',
         tags: ['Kubernetes', 'Docker', 'Microservices', 'CI/CD', 'AWS'],
         description: 'A fully containerized e-commerce platform built with microservices architecture, featuring automated deployment pipelines and scalable infrastructure. The platform handles high traffic loads while maintaining optimal performance and reliability.',
         features: [
@@ -1310,14 +1332,14 @@
           'Secure API gateway with rate limiting and authentication'
         ],
         links: [
-          { text: 'View GitHub', url: '#', icon: '💻' },
+          { text: 'View GitHub', url: 'https://github.com/ishaanzatey/online_shop.git', icon: '💻' },
           { text: 'Live Demo', url: '#', icon: '🚀' }
         ]
       },
       automation: {
         title: 'Automated Infrastructure Monitoring',
         category: 'Automation',
-        image: '⚙️',
+        image: 'images/automation-dashboard.png',
         tags: ['Python', 'Rundeck', 'Automation', 'Monitoring', 'API'],
         description: 'An intelligent monitoring system that proactively tracks server health, disk usage, and system performance across 160+ Linux servers. Features automated alerting and self-healing capabilities.',
         features: [
@@ -1338,7 +1360,7 @@
       analytics: {
         title: 'Real-time Performance Dashboards',
         category: 'Analytics',
-        image: '📊',
+        image: 'images/analytics-dashboard1.png',
         tags: ['Dynatrace', 'Grafana', 'Kibana', 'Analytics', 'Monitoring'],
         description: 'Comprehensive performance monitoring dashboards providing real-time insights into system health, application performance, and infrastructure metrics. Enables proactive incident management and optimization.',
         features: [
@@ -1409,7 +1431,9 @@
       modalTitle.textContent = project.title;
       
       modalBody.innerHTML = `
-        <div class="project-detail-image">${project.image}</div>
+        <div class="project-detail-image">
+          <img src="${project.image}" alt="${project.title}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 64px; color: var(--secondary-color);\'>${project.category === 'E-Commerce' ? '🛒' : project.category === 'Automation' ? '⚙️' : '📊'}</div>'">
+        </div>
         <div class="project-tags">
           ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
         </div>
@@ -1447,56 +1471,13 @@
     }
 
     function downloadResume() {
-      // Create a simple text-based resume for download
-      const resumeContent = `
-ISHAN ZATEY
-Systems Engineer | Site Reliability Engineer
-Email: ishaan.zate@gmail.com | Phone: +91 9284246581
-
-PROFESSIONAL SUMMARY
-===============================
-Results-driven Systems Engineer with 3.8 years of experience in enterprise infrastructure management, automation, and site reliability engineering. Proven track record of managing 160+ Linux servers with 100% SLA compliance and 60% reduction in manual operational effort.
-
-TECHNICAL EXPERTISE
-===============================
-• Infrastructure & Automation: Linux, Shell Scripting, Python, Ansible, Terraform, Rundeck
-• Cloud & Containers: AWS, Azure, Docker, Kubernetes, OpenShift
-• Monitoring & Observability: Prometheus, Grafana, Dynatrace, ELK Stack, Splunk
-• DevOps & CI/CD: Jenkins, Git, GitLab, Helm
-
-PROFESSIONAL EXPERIENCE
-===============================
-Systems Engineer | CGI | Current
-• Automated operational workflows across 160+ Linux servers
-• Designed real-time monitoring dashboards achieving 40% MTTR reduction
-• Led high-severity incident resolution with 100% SLA compliance
-• Implemented infrastructure automation reducing manual effort by 60%
-
-KEY PROJECTS
-===============================
-• Cloud-Native E-Commerce Platform - Kubernetes, Docker, Microservices
-• Automated Infrastructure Monitoring - Python, Rundeck, API Integration
-• Real-time Performance Dashboards - Dynatrace, Grafana, Kibana
-
-ACHIEVEMENTS
-===============================
-• 160+ Linux Servers Managed
-• 60% Reduction in Manual Effort
-• 100% SLA Compliance
-• 40% Improvement in Mean Time to Recovery
-      `;
-
-      const blob = new Blob([resumeContent], { type: 'text/plain' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'Ishan_Zatey_Resume.txt';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
+        const link = document.createElement("a");
+        link.href = "assets/Ishan_Zate_Resume.pdf";  // Path to your PDF file
+        link.download = "Ishan_Zate_Resume.pdf";    // Filename for the downloaded file
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
-
     // Close modal when clicking outside
     document.addEventListener('click', function(e) {
       if (e.target.classList.contains('modal')) {
