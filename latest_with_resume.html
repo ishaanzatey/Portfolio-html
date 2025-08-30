@@ -641,6 +641,14 @@
       transform: scale(0.8) translateY(50px);
       transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       position: relative;
+      /* Hide scrollbar but keep scroll functionality */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+    }
+
+    /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+    .modal-content::-webkit-scrollbar {
+      display: none;
     }
 
     .modal.active .modal-content {
