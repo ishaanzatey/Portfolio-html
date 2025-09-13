@@ -460,9 +460,100 @@
       color: var(--dark-gray);
     }
 
+    /* Certifications Section */
+    .certifications {
+      background: var(--white);
+    }
+
+    .certifications-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-top: 60px;
+    }
+
+    .certification-card {
+      background: var(--white);
+      padding: 32px;
+      border-radius: 18px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .certification-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .certification-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-color), #0056cc);
+    }
+
+    .certification-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent-color), #0056cc);
+      color: var(--white);
+      font-size: 32px;
+      position: relative;
+    }
+
+    .certification-card h4 {
+      font-size: 20px;
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: 0.009em;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    .certification-issuer {
+      font-size: 16px;
+      color: var(--accent-color);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .certification-date {
+      font-size: 14px;
+      color: var(--secondary-color);
+      margin-bottom: 12px;
+    }
+
+    .certification-description {
+      font-size: 15px;
+      line-height: 1.4;
+      color: var(--dark-gray);
+      margin-bottom: 16px;
+    }
+
+    .certification-credential {
+      font-size: 12px;
+      color: var(--secondary-color);
+      background: var(--light-gray);
+      padding: 4px 8px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+
     /* Projects Section */
     .projects {
-      background: var(--white);
+      background: var(--light-gray);
     }
 
     .projects-grid {
@@ -813,28 +904,56 @@
 
     /* Resume Modal Styles */
     .resume-modal .modal-content {
-      width: 98vw;
-      max-width: 1600px;
-      max-height: 95vh;
+      max-width: 1400px;
     }
 
     .resume-viewer {
       width: 100%;
-      height: 70vh;
+      min-height: 500px;
       border: none;
       border-radius: 12px;
       background: var(--light-gray);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       margin-bottom: 20px;
-      position: relative;
+      padding: 40px;
+      text-align: center;
     }
 
-    .resume-placeholder {
+    .resume-preview {
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .resume-preview h3 {
+      font-size: 24px;
+      color: var(--primary-color);
+      margin-bottom: 20px;
       text-align: center;
-      color: var(--secondary-color);
+    }
+
+    .resume-section {
+      margin-bottom: 20px;
+    }
+
+    .resume-section h4 {
       font-size: 18px;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    .resume-section p, .resume-section li {
+      font-size: 16px;
+      color: var(--dark-gray);
+      line-height: 1.5;
+      margin-bottom: 5px;
+    }
+
+    .resume-section ul {
+      padding-left: 20px;
     }
 
     .resume-actions {
@@ -846,7 +965,7 @@
     }
 
     .download-btn {
-      padding: 12px 24px;
+      padding: 14px 28px;
       background: var(--accent-color);
       color: var(--white);
       text-decoration: none;
@@ -858,6 +977,7 @@
       gap: 8px;
       border: none;
       cursor: pointer;
+      font-size: 16px;
     }
 
     .download-btn:hover {
@@ -985,6 +1105,15 @@
         grid-template-columns: 1fr;
         max-width: 100%;
       }
+
+      .certifications-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .certification-card {
+        padding: 24px;
+      }
     }
 
     .fade-in {
@@ -1008,6 +1137,7 @@
         <li><a href="#home" data-section="home">Home</a></li>
         <li><a href="#about" data-section="about">About</a></li>
         <li><a href="#skills" data-section="skills">Expertise</a></li>
+        <li><a href="#certifications" data-section="certifications">Certifications</a></li>
         <li><a href="#projects" data-section="projects">Projects</a></li>
         <li><a href="#contact" data-section="contact">Contact</a></li>
       </ul>
@@ -1153,6 +1283,51 @@
     </div>
   </section>
 
+  <!-- Certifications Section -->
+  <section id="certifications" class="section certifications">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-eyebrow">Certifications</div>
+        <h2 class="section-title">Validated expertise.</h2>
+        <p class="section-subtitle">
+          Professional certifications that validate my technical skills and commitment to continuous learning.
+        </p>
+      </div>
+      <div class="certifications-grid">
+        <div class="certification-card fade-in">
+          <div class="certification-icon">🏆</div>
+          <h4>AWS Certified Solutions Architect</h4>
+          <div class="certification-issuer">Amazon Web Services</div>
+          <div class="certification-date">December 2023</div>
+          <p class="certification-description">
+            Validates expertise in designing distributed systems on AWS platform, covering compute, storage, networking, and security services.
+          </p>
+          <div class="certification-credential">Credential ID: AWS-CSA-2023</div>
+        </div>
+        <div class="certification-card fade-in">
+          <div class="certification-icon">🐧</div>
+          <h4>Red Hat Certified Engineer</h4>
+          <div class="certification-issuer">Red Hat</div>
+          <div class="certification-date">August 2023</div>
+          <p class="certification-description">
+            Demonstrates advanced Linux system administration skills, including automation, security, and performance tuning on Red Hat Enterprise Linux.
+          </p>
+          <div class="certification-credential">Credential ID: RHCE-2023</div>
+        </div>
+        <div class="certification-card fade-in">
+          <div class="certification-icon">☸️</div>
+          <h4>Certified Kubernetes Administrator</h4>
+          <div class="certification-issuer">Cloud Native Computing Foundation</div>
+          <div class="certification-date">March 2024</div>
+          <p class="certification-description">
+            Validates skills in Kubernetes cluster management, application lifecycle management, and troubleshooting containerized applications.
+          </p>
+          <div class="certification-credential">Credential ID: CKA-2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Projects Section -->
   <section id="projects" class="section projects">
     <div class="container">
@@ -1277,20 +1452,50 @@
       </div>
       <div class="modal-body">
         <div class="resume-viewer">
-          <div class="resume-placeholder">
-            <h3>📄 Resume Preview</h3>
-            <p>Systems Engineer | Site Reliability Engineer</p>
-            <br>
-            <p><strong>Experience:</strong></p>
-            <p>• CGI - Systems Engineer (Current)</p>
-            <p>• 3.8 years in infrastructure management</p>
-            <p>• 160+ Linux servers automated</p>
-            <br>
-            <p>• Infrastructure & Automation</p>
-            <p>• Cloud & Containers</p>
-            <p>• DevOps & CI/CD</p>
-            <p>• Monitoring & Observability</p>
-            <p>• Site Reliability & Incident Management</p>
+          <div class="resume-preview">
+            <h3>📄 Ishan Zatey - Systems Engineer</h3>
+            
+            <div class="resume-section">
+              <h4>Professional Summary</h4>
+              <p>Systems Engineer and Site Reliability Specialist with 3.8 years of experience in enterprise infrastructure management, automation, and DevOps practices.</p>
+            </div>
+            
+            <div class="resume-section">
+              <h4>Experience</h4>
+              <p><strong>CGI - Systems Engineer</strong> (Jul 2025 - Current)</p>
+              <ul>
+                <li>Leading infrastructure automation initiatives</li>
+                <li>Managing enterprise-scale systems</li>
+              </ul>
+              
+              <p><strong>Accenture - Software Analyst</strong> (Oct 2021 - Jul 2025)</p>
+              <ul>
+                <li>Automated operational workflows across 160+ Linux servers</li>
+                <li>Designed real-time monitoring dashboards</li>
+                <li>Led high-severity incident resolution efforts</li>
+                <li>Achieved 60% reduction in manual operational effort</li>
+              </ul>
+            </div>
+            
+            <div class="resume-section">
+              <h4>Core Competencies</h4>
+              <ul>
+                <li>Infrastructure & Automation: Linux, Python, Ansible, Terraform</li>
+                <li>Cloud & Containers: AWS, Azure, Docker, Kubernetes, OpenShift</li>
+                <li>Monitoring & Observability: Prometheus, Grafana, Dynatrace, ELK Stack</li>
+                <li>DevOps & CI/CD: Jenkins, Git, GitLab, Helm</li>
+              </ul>
+            </div>
+            
+            <div class="resume-section">
+              <h4>Key Achievements</h4>
+              <ul>
+                <li>160+ Linux servers successfully automated and managed</li>
+                <li>60% reduction in manual operational effort</li>
+                <li>100% SLA compliance maintained</li>
+                <li>40% reduction in Mean Time to Recovery (MTTR)</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="resume-actions">
@@ -1298,6 +1503,10 @@
             <span>⬇️</span>
             Download PDF
           </button>
+          <a href="mailto:ishaan.zate@gmail.com" class="download-btn secondary" style="background: transparent; color: var(--accent-color); border: 2px solid var(--accent-color);">
+            <span>📧</span>
+            Contact Me
+          </a>
         </div>
       </div>
     </div>
