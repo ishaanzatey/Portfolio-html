@@ -910,8 +910,28 @@
       display: block;
       margin: 0 auto;
     }
+    
+    .certification-icon img {
+        width: 40px; 
+        height: 40px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+    }
 
+    .certifications-grid a {
+        text-decoration: none;   /* no underline */
+        color: inherit;          /* keep text color normal */
+        display: inline-block;
+    }
 
+    .certifications-grid a:hover {
+        opacity: 0.9;
+        transform: scale(1.02);
+        transition: 0.2s ease-in-out;
+    }
+
+/*till this is updated
 
     /* Resume Modal Styles */
     .resume-modal .modal-content {
@@ -1295,55 +1315,58 @@
   </section>
 
   <!-- Certifications Section -->
-  <section id="certifications" class="section certifications">
-    <div class="container">
-      <div class="section-header fade-in">
-        <div class="section-eyebrow">Certifications</div>
-        <h2 class="section-title">Validated expertise.</h2>
-        <p class="section-subtitle">
-          Professional certifications that validate my technical skills and commitment to continuous learning.
-        </p>
-      </div>
-      <div class="certifications-grid">
-        <div class="certification-card fade-in">
-          <div class="certification-icon">
-            <img src="images/az-900.png" alt="AZ-900 Icon">
-          </div>
-          <h4>Microsoft Certified: Azure Fundamentals (AZ-900)</h4>
-          <div class="certification-issuer">Microsoft</div>
-          <div class="certification-date">Issued: 2023</div>
-          <p class="certification-description">
-            Demonstrates foundational knowledge of Microsoft Azure cloud concepts, services, workloads, security, and pricing.
-          </p>
-          <div class="certification-credential">Credential ID: AZ-900</div>
+<div class="certifications-grid">
+  
+    <!-- AZ-900 -->
+    <div class="certification-card fade-in">
+      <a href="https://learn.microsoft.com/en-gb/users/surendrazateyishan-9749/credentials/38130f7d164b938c" target="https://learn.microsoft.com/en-gb/users/surendrazateyishan-9749/credentials/38130f7d164b938c">
+        <div class="certification-icon">
+          <img src="images/az-900.png" alt="AZ-900 Icon">
         </div>
-      
-        <div class="certification-card fade-in">
-          <div class="certification-icon">
-            <img src="images/ai-900.png" alt="AI-900 Icon">
-          </div>
-          <h4>Microsoft Certified: Azure AI Fundamentals (AI-900)</h4>
-          <div class="certification-issuer">Microsoft</div>
-          <div class="certification-date">Issued: 2023</div>
-          <p class="certification-description">
-            Validates understanding of AI and machine learning concepts and how to implement them using Azure AI services.
-          </p>
-          <div class="certification-credential">Credential ID: AI-900</div>
+        <h4>Microsoft Certified: Azure Fundamentals (AZ-900)</h4>
+      </a>
+      <div class="certification-issuer">Microsoft</div>
+      <div class="certification-date">Issued: 2023</div>
+      <p class="certification-description">
+        Demonstrates foundational knowledge of Microsoft Azure cloud concepts, services, workloads, security, and pricing.
+      </p>
+      <div class="certification-credential">Credential ID: AZ-900</div>
+    </div>
+  
+    <!-- AI-900 -->
+    <div class="certification-card fade-in">
+      <a href="https://learn.microsoft.com/en-gb/users/surendrazateyishan-9749/credentials/439204becadc7d8e" target="https://learn.microsoft.com/en-gb/users/surendrazateyishan-9749/credentials/439204becadc7d8e">
+        <div class="certification-icon">
+          <img src="images/ai-900.png" alt="AI-900 Icon">
         </div>
-      
-        <div class="certification-card fade-in">
-          <div class="certification-icon">
-            <img src="images/az-104.png" alt="AZ-104 Icon">
-          </div>
-          <h4>Microsoft Certified: Azure Administrator Associate (AZ-104)</h4>
-          <div class="certification-issuer">Microsoft</div>
-          <div class="certification-date">Issued: 2024</div>
-          <p class="certification-description">
-            Validates skills in implementing, managing, and monitoring Microsoft Azure environments including compute, storage, identity, and networking.
-          </p>
-          <div class="certification-credential">Credential ID: AZ-104</div>
+        <h4>Microsoft Certified: Azure AI Fundamentals (AI-900)</h4>
+      </a>
+      <div class="certification-issuer">Microsoft</div>
+      <div class="certification-date">Issued: 2023</div>
+      <p class="certification-description">
+        Validates understanding of AI and machine learning concepts and how to implement them using Azure AI services.
+      </p>
+      <div class="certification-credential">Credential ID: AI-900</div>
+    </div>
+  
+    <!-- AZ-104 -->
+    <div class="certification-card fade-in">
+      <a href="https://learn.microsoft.com/en-gb/users/surendrazateyishan-9749/credentials/264dbaa98d3b43bf" target="https://learn.microsoft.com/en-gb/users/surendrazateyishan-9749/credentials/264dbaa98d3b43bf">
+        <div class="certification-icon">
+          <img src="images/az-104.png" alt="AZ-104 Icon">
         </div>
-      </div>      
+        <h4>Microsoft Certified: Azure Administrator Associate (AZ-104)</h4>
+      </a>
+      <div class="certification-issuer">Microsoft</div>
+      <div class="certification-date">Issued: 2024</div>
+      <p class="certification-description">
+        Validates skills in implementing, managing, and monitoring Microsoft Azure environments including compute, storage, identity, and networking.
+      </p>
+      <div class="certification-credential">Credential ID: AZ-104</div>
+    </div>
+  
+  </div>
+  
   </section>
 
   <!-- Projects Section -->
