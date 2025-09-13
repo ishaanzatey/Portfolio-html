@@ -653,28 +653,6 @@
       margin-bottom: 20px;
     }
 
-    .project-link {
-      color: var(--accent-color);
-      text-decoration: none;
-      font-size: 17px;
-      font-weight: 400;
-      letter-spacing: -0.022em;
-      transition: color 0.3s ease;
-      pointer-events: none;
-    }
-
-    .project-link:hover {
-      color: #0056cc;
-    }
-
-    .project-link::after {
-      content: ' →';
-      transition: transform 0.3s ease;
-    }
-
-    .project-link:hover::after {
-      transform: translateX(4px);
-    }
 
     /* Contact Section */
     .contact {
@@ -1091,42 +1069,6 @@
       font-weight: 600;
     }
 
-    .project-links {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      padding-top: 20px;
-      border-top: 1px solid var(--medium-gray);
-    }
-
-    .project-link-btn {
-      padding: 12px 24px;
-      background: var(--accent-color);
-      color: var(--white);
-      text-decoration: none;
-      border-radius: 12px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .project-link-btn:hover {
-      background: #0056cc;
-      transform: translateY(-2px);
-    }
-
-    .project-link-btn.secondary {
-      background: transparent;
-      color: var(--accent-color);
-      border: 1px solid var(--accent-color);
-    }
-
-    .project-link-btn.secondary:hover {
-      background: var(--accent-color);
-      color: var(--white);
-    }
 
     /* Resume Modal Styles */
     .resume-modal .modal-content {
@@ -1343,9 +1285,6 @@
         font-size: 24px;
       }
 
-      .project-links {
-        flex-direction: column;
-      }
 
       .resume-viewer {
         height: 50vh;
@@ -1636,7 +1575,6 @@
               Architected a containerized microservices application using Kubernetes with CI/CD pipeline,
               achieving 80% reduction in image size and 50% faster deployment.
             </p>
-            <a href="#" class="project-link">View details</a>
           </div>
         </div>
         <div class="project-card fade-in" onclick="openProjectModal('automation')">
@@ -1654,7 +1592,6 @@
               Created Python-driven disk monitoring tool with API/SMTP alerts, integrated with Rundeck for
               scheduled health checks, reclaiming 60% of weekly effort.
             </p>
-            <a href="#" class="project-link">View details</a>
           </div>
         </div>
         <div class="project-card fade-in" onclick="openProjectModal('analytics')">
@@ -1672,7 +1609,6 @@
               Designed comprehensive dashboards using Dynatrace, Grafana, and Kibana, achieving 40% reduction
               in Mean Time to Recovery for critical incidents.
             </p>
-            <a href="#" class="project-link">View details</a>
           </div>
         </div>
       </div>
@@ -1881,10 +1817,6 @@
           'Auto-scaling based on traffic patterns and resource utilization',
           'Comprehensive monitoring and logging with Prometheus and Grafana',
           'Secure API gateway with rate limiting and authentication'
-        ],
-        links: [
-          { text: 'View GitHub', url: '#', icon: '💻' },
-          { text: 'Live Demo', url: '#', icon: '🚀' }
         ]
       },
       automation: {
@@ -1973,10 +1905,6 @@
           '60% reduction in manual operational effort',
           'Custom dashboards for infrastructure visibility',
           'Historical data analysis and trend reporting'
-        ],
-        links: [
-          { text: 'View Code', url: '#', icon: '💻' },
-          { text: 'Documentation', url: '#', icon: '📚' }
         ]
       },
       analytics: {
@@ -2065,10 +1993,6 @@
           'Predictive analytics for capacity planning',
           'Cross-platform monitoring for hybrid environments',
           'Executive reporting with KPI tracking and SLA compliance'
-        ],
-        links: [
-          { text: 'Dashboard Demo', url: '#', icon: '📈' },
-          { text: 'Architecture', url: '#', icon: '🏗️' }
         ]
       }
     };
@@ -2141,15 +2065,6 @@
             <ul>
               ${project.features.map(feature => `<li>${feature}</li>`).join('')}
             </ul>
-          </div>
-          
-          <div class="project-links">
-            ${project.links.map(link => `
-              <a href="${link.url}" class="project-link-btn">
-                <span>${link.icon}</span>
-                ${link.text}
-              </a>
-            `).join('')}
           </div>
         </div>
       `;
