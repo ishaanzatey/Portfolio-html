@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ishan Zatey - Systems Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Apple-Inspired Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-text: #1d1d1f;
+            --secondary-text: #6e6e73;
+            --primary-bg: #f5f5f7;
+            --secondary-bg: #fff;
+            --accent-color: #0071e3;
+            --border-color: #d2d2d7;
+            --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--primary-text);
+            background-color: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-text);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+        }
+        
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        
+        .hero-content p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--secondary-text);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: var(--primary-text);
+            color: white;
+            text-decoration: none;
+            border-radius: 999px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            background-color: #333;
+        }
+        
+        .cta-secondary {
+            background-color: transparent;
+            color: var(--primary-text);
+            border: 1px solid var(--border-color);
+            margin-left: 1rem;
+        }
+
+        .cta-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        /* Sections */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary-text);
+        }
+        
+        /* About Section */
+        #about {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+        
+        .about-text h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-text);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-text);
+        }
+        
+        .resume-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background-color: var(--secondary-bg);
+            color: var(--primary-text);
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .resume-button:hover {
+            background-color: var(--primary-text);
+            color: white;
+        }
+        
+        /* Skills Section */
+        #skills {
+            background-color: var(--secondary-bg);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-card {
+            background-color: var(--primary-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        /* Projects Section */
+        .projects-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 6rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-section.light-bg {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-section.dark-bg {
+            background-color: #1d1d1f;
+            color: white;
+        }
+
+        .project-content-wrapper {
+            max-width: 1000px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .project-text {
+            text-align: center;
+            max-width: 800px;
+        }
+        
+        .project-text h3 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .project-text p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--secondary-text);
+        }
+
+        .dark-bg .project-text p {
+            color: #d2d2d7;
+        }
+
+        .project-key-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            max-width: 250px;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-text);
+        }
+
+        .dark-bg .feature-icon {
+            color: white;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .feature-description {
+            color: var(--secondary-text);
+        }
+
+        .dark-bg .feature-description {
+            color: #d2d2d7;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: var(--secondary-bg);
+            text-align: center;
+        }
+        
+        .contact-info {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .contact-info a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .contact-info a:hover {
+            color: var(--primary-text);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 2000;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: var(--secondary-text);
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+        
+        .modal-close:hover {
+            color: var(--primary-text);
+        }
+
+        .project-details h3, .resume-details h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-text);
+        }
+        
+        .project-details p, .resume-details p {
+            margin-bottom: 1rem;
+            color: var(--secondary-text);
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-tag {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+        }
+        
+        .project-links a, .resume-actions a {
+            margin-right: 1rem;
+        }
+        
+        .project-links {
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+        
+        .resume-actions {
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            text-align: right;
+        }
+        
+        .resume-actions .cta-button {
+            margin-left: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            .nav-links {
+                gap: 1.5rem;
+            }
+            #about {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+            .cta-button {
+                display: block;
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+            .cta-secondary {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Engineering for a Reliable Future.</h1>
+            <p>3.8 years of experience managing and optimizing enterprise infrastructure. My expertise lies in automation, observability, and incident management, where I design resilient systems and streamline operations.</p>
+            <div>
+                <a href="#projects" class="cta-button">Explore My Work</a>
+                <a href="#contact" class="cta-button cta-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="about-image">
+            <img src="https://placehold.co/400x400/D3D3D3/000000?text=Ishan" alt="Ishan Zatey" style="width:100%; height:auto; border-radius:10px;">
+        </div>
+        <div class="about-text">
+            <h2>About Me</h2>
+            <p>I'm a results-driven Systems Engineer and Site Reliability Specialist with a passion for building robust and scalable systems. My career at Accenture has provided me with a strong foundation in managing complex infrastructure and implementing proactive reliability measures.</p>
+            <p>I've successfully automated operational workflows across over 160 Linux servers, designed and implemented real-time monitoring dashboards, and led resolution efforts during high-severity incidents, resulting in a significant reduction in Mean Time to Recovery (MTTR).</p>
+            <a href="#" class="resume-button" onclick="openResumeModal()">
+                <i class="fa-solid fa-file-alt"></i> View Resume
+            </a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="section-header">
+            <h2>My Expertise</h2>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h4>Infrastructure & Automation</h4>
+                <p>Linux, Shell scripting, Python, Ansible, Terraform, Rundeck.</p>
+            </div>
+            <div class="skill-card">
+                <h4>Cloud & Containers</h4>
+                <p>AWS, Azure, Docker, Kubernetes, OpenShift.</p>
+            </div>
+            <div class="skill-card">
+                <h4>Monitoring & Observability</h4>
+                <p>Prometheus, Grafana, Dynatrace, ELK Stack, Splunk.</p>
+            </div>
+            <div class="skill-card">
+                <h4>DevOps & CI/CD</h4>
+                <p>Jenkins, Git, GitLab, Helm.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="section-header">
+            <h2>Featured Projects</h2>
+        </div>
+        <div class="projects-container">
+            <!-- Project 1: Cloud-Native E-Commerce Platform -->
+            <div class="project-section light-bg" onclick="openProjectModal('ecommerce')">
+                <div class="project-content-wrapper">
+                    <div class="project-text">
+                        <h3>Cloud-Native E-Commerce Platform</h3>
+                        <p>Architected a containerized microservices application using Kubernetes.</p>
+                    </div>
+                    <div class="project-key-features">
+                        <div class="feature-item">
+                            <h3>80%</h3>
+                            <p>Reduction in image size</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>50%</h3>
+                            <p>Faster deployment times</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Automated Infrastructure Monitoring -->
+            <div class="project-section dark-bg" onclick="openProjectModal('automation')">
+                <div class="project-content-wrapper">
+                    <div class="project-text">
+                        <h3>Automated Infrastructure Monitoring</h3>
+                        <p>A Python-driven disk monitoring tool integrated with Rundeck for health checks.</p>
+                    </div>
+                    <div class="project-key-features">
+                        <div class="feature-item">
+                            <i class="fas fa-robot feature-icon"></i>
+                            <p>Automated health checks</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>60%</h3>
+                            <p>Reduction in weekly manual effort</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: Real-time Performance Dashboards -->
+            <div class="project-section light-bg" onclick="openProjectModal('analytics')">
+                <div class="project-content-wrapper">
+                    <div class="project-text">
+                        <h3>Real-time Performance Dashboards</h3>
+                        <p>Designed and deployed comprehensive dashboards for performance monitoring.</p>
+                    </div>
+                    <div class="project-key-features">
+                        <div class="feature-item">
+                            <i class="fas fa-chart-line feature-icon"></i>
+                            <p>Real-time analytics</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>40%</h3>
+                            <p>Reduction in MTTR</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="section-header">
+            <h2>Get in Touch</h2>
+        </div>
+        <p>Feel free to reach out to me for collaboration or inquiries.</p>
+        <div class="contact-info">
+            <a href="mailto:ishaan.zate@gmail.com"><i class="fa-solid fa-envelope"></i> ishaan.zate@gmail.com</a>
+            <a href="tel:+919284246581"><i class="fa-solid fa-phone"></i> +91 9284246581</a>
+            <a href="https://www.linkedin.com/in/ishan-zatey/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/ishaanzatey" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('projectModal')">&times;</button>
+            <div class="project-details" id="projectModalBody"></div>
+        </div>
+    </div>
+
+    <!-- Resume Modal -->
+    <div id="resumeModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('resumeModal')">&times;</button>
+            <div class="resume-details" id="resumeModalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const portfolioData = {
+                projects: {
+                    ecommerce: {
+                        title: 'Cloud-Native E-Commerce Platform',
+                        description: 'A fully containerized e-commerce platform built with a microservices architecture. It features automated deployment pipelines and scalable infrastructure, capable of handling high traffic loads while maintaining optimal performance and reliability.',
+                        tags: ['Kubernetes', 'Docker', 'Microservices', 'CI/CD', 'AWS'],
+                        features: [
+                            'Architected and deployed a containerized microservices application on Kubernetes.',
+                            'Implemented a robust CI/CD pipeline using Jenkins and GitLab.',
+                            'Achieved an 80% reduction in Docker image size through multi-stage builds.',
+                            'Enabled 50% faster deployment times with parallel processing.'
+                        ],
+                        links: [
+                            { text: 'View on GitHub', url: 'https://github.com/ishaanzatey/online_shop.git' },
+                            { text: 'Live Demo', url: '#' }
+                        ]
+                    },
+                    automation: {
+                        title: 'Automated Infrastructure Monitoring',
+                        description: 'An intelligent monitoring system that proactively tracks server health, disk usage, and system performance across 160+ Linux servers. This system features automated alerting and self-healing capabilities to minimize manual intervention.',
+                        tags: ['Python', 'Rundeck', 'Automation', 'Monitoring', 'API'],
+                        features: [
+                            'Developed a Python-based disk monitoring tool that sends alerts via API and SMTP.',
+                            'Integrated with Rundeck to schedule and automate server health checks.',
+                            'Reclaimed 60% of weekly manual effort by automating routine tasks.'
+                        ],
+                        links: [
+                            { text: 'View Documentation', url: '#' },
+                            { text: 'API Reference', url: '#' }
+                        ]
+                    },
+                    analytics: {
+                        title: 'Real-time Performance Dashboards',
+                        description: 'Comprehensive performance monitoring dashboards providing real-time insights into system health, application performance, and infrastructure metrics. This project enabled proactive incident management and optimization.',
+                        tags: ['Dynatrace', 'Grafana', 'Kibana', 'Analytics', 'Monitoring'],
+                        features: [
+                            'Designed and implemented Dynatrace and Grafana dashboards for performance tracking.',
+                            'Utilized the ELK Stack (Elasticsearch, Logstash, Kibana) for log analysis.',
+                            'Achieved a 40% reduction in Mean Time to Recovery (MTTR) for critical incidents.'
+                        ],
+                        links: [
+                            { text: 'Dashboard Demo', url: '#' },
+                            { text: 'Architecture Overview', url: '#' }
+                        ]
+                    }
+                },
+                resume: {
+                    summary: 'Systems Engineer and Site Reliability Specialist with 3.8 years of experience in enterprise infrastructure management, automation, and DevOps practices. Proficient in a wide range of technologies for building and maintaining robust, scalable, and resilient systems.',
+                    experience: [{
+                        company: 'CGI',
+                        role: 'Systems Engineer',
+                        duration: 'Jul 2025 - Present',
+                        responsibilities: [
+                            'Leading infrastructure automation initiatives.',
+                            'Managing enterprise-scale systems to ensure high availability and performance.'
+                        ]
+                    }, {
+                        company: 'Accenture',
+                        role: 'Software Analyst',
+                        duration: 'Oct 2021 - Jul 2025',
+                        responsibilities: [
+                            'Automated operational workflows across 160+ Linux servers, achieving a 60% reduction in manual effort.',
+                            'Designed and implemented real-time monitoring dashboards, leading to proactive incident management.',
+                            'Led resolution efforts for high-severity incidents, ensuring 100% SLA compliance.'
+                        ]
+                    }],
+                    skills: [
+                        'Infrastructure & Automation: Linux, Shell scripting, Python, Ansible, Terraform, Rundeck.',
+                        'Cloud & Containers: AWS, Azure, Docker, Kubernetes, OpenShift.',
+                        'Monitoring & Observability: Prometheus, Grafana, Dynatrace, ELK Stack, Splunk.'
+                    ],
+                    achievements: [
+                        'Managed and automated 160+ Linux servers.',
+                        'Reduced manual operational effort by 60%.',
+                        'Maintained 100% SLA compliance.',
+                        'Reduced Mean Time to Recovery (MTTR) by 40%.'
+                    ]
+                }
+            };
+
+            const openModal = (modalId) => {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            };
+
+            window.closeModal = (modalId) => {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+
+            window.openProjectModal = (projectId) => {
+                const project = portfolioData.projects[projectId];
+                const modalBody = document.getElementById('projectModalBody');
+                if (project) {
+                    modalBody.innerHTML = `
+                        <h3>${project.title}</h3>
+                        <div class="project-tags">
+                            ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                        </div>
+                        <p>${project.description}</p>
+                        <h4>Key Features & Achievements:</h4>
+                        <ul>
+                            ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                        <div class="project-links">
+                            ${project.links.map(link => `<a href="${link.url}" class="cta-button" target="_blank" rel="noopener noreferrer">${link.text}</a>`).join('')}
+                        </div>
+                    `;
+                    openModal('projectModal');
+                }
+            };
+
+            window.openResumeModal = () => {
+                const resume = portfolioData.resume;
+                const modalBody = document.getElementById('resumeModalBody');
+                modalBody.innerHTML = `
+                    <h3>Professional Summary</h3>
+                    <p>${resume.summary}</p>
+                    
+                    <h3>Experience</h3>
+                    ${resume.experience.map(job => `
+                        <h4>${job.role} - ${job.company}</h4>
+                        <p><em>${job.duration}</em></p>
+                        <ul>
+                            ${job.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                        </ul>
+                    `).join('')}
+                    
+                    <h3>Core Competencies</h3>
+                    <ul>
+                        ${resume.skills.map(skill => `<li>${skill}</li>`).join('')}
+                    </ul>
+                    
+                    <h3>Key Achievements</h3>
+                    <ul>
+                        ${resume.achievements.map(achv => `<li>${achv}</li>`).join('')}
+                    </ul>
+                    
+                    <div class="resume-actions">
+                        <a href="mailto:ishaan.zate@gmail.com" class="cta-button">Contact Me</a>
+                    </div>
+                `;
+                openModal('resumeModal');
+            };
+
+            // Smooth scroll for nav links
+            document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Active class for navbar links on scroll
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const sections = document.querySelectorAll('.section, #hero');
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= sectionTop - 100 && scrollY < sectionTop + sectionHeight - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
