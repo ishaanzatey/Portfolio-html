@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Project Modal</title>
+  <style>
+    /* Your existing styles remain the same - only adding modal enhancements */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+      background: #f5f5f7;
+      padding: 20px;
+    }
+
+    /* Enhanced Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .modal.active {
+      display: flex;
+      opacity: 1;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #ffffff;
+      border-radius: 24px;
+      width: 95vw;
+      max-width: 1400px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 100px rgba(0, 0, 0, 0.3);
+      transform: scale(0.8) translateY(50px);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .modal-content::-webkit-scrollbar {
+      display: none;
+    }
+
+    .modal.active .modal-content {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      position: sticky;
+      top: 0;
+      background: #ffffff;
+      border-radius: 24px 24px 0 0;
+      padding: 20px 30px;
+      border-bottom: 1px solid #e8e8ed;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: saturate(180%) blur(20px);
+      z-index: 10;
+    }
+
+    .modal-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #1d1d1f;
+      margin: 0;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e8e8ed;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 18px;
+      color: #515154;
+    }
+
+    .modal-close:hover {
+      background: #515154;
+      color: #ffffff;
+      transform: scale(1.1);
+    }
+
+    /* Apple-style Features Grid for Modal */
+    .project-features-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin: 40px 0;
+      padding: 0 40px;
+    }
+
+    .feature-highlight {
+      background: linear-gradient(135deg, #1d1d1f 0%, #2d2d2f 100%);
+      border-radius: 20px;
+      padding: 24px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .feature-highlight:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 122, 255, 0.15);
+      border-color: rgba(0, 122, 255, 0.3);
+    }
+
+    .feature-highlight::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.6s;
+    }
+
+    .feature-highlight:hover::before {
+      left: 100%;
+    }
+
+    /* Grid Layout Variations */
+    .feature-large {
+      grid-column: span 6;
+      grid-row: span 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .feature-medium {
+      grid-column: span 4;
+      grid-row: span 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .feature-small {
+      grid-column: span 3;
+      grid-row: span 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .feature-wide {
+      grid-column: span 12;
+      grid-row: span 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+    }
+
+    /* Feature Content Styling */
+    .feature-number {
+      font-size: clamp(32px, 6vw, 64px);
+      font-weight: 700;
+      background: linear-gradient(45deg, #007aff, #00d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+      line-height: 0.9;
+    }
+
+    .feature-title {
+      font-size: clamp(16px, 2.5vw, 20px);
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: white;
+    }
+
+    .feature-subtitle {
+      font-size: clamp(12px, 1.8vw, 14px);
+      color: #86868b;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+
+    /* Background Variants */
+    .bg-automation {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+
+    .bg-cloud {
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    }
+
+    .bg-monitoring {
+      background: linear-gradient(135deg, #134e5e 0%, #71b280 100%);
+    }
+
+    .bg-performance {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .bg-containers {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .bg-cicd {
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    }
+
+    /* Progress indicators */
+    .progress-ring {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 16px;
+    }
+
+    .progress-ring circle {
+      fill: transparent;
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 4;
+      stroke-dasharray: 157;
+      stroke-dashoffset: 157;
+      transform-origin: center;
+      transform: rotate(-90deg);
+      transition: stroke-dashoffset 1s ease-in-out;
+    }
+
+    .progress-ring .progress {
+      stroke: #00d4ff;
+      stroke-dashoffset: calc(157 - (157 * var(--progress, 0)) / 100);
+    }
+
+    .feature-highlight:hover .progress {
+      animation: drawProgress 1.5s ease-in-out;
+    }
+
+    @keyframes drawProgress {
+      from { stroke-dashoffset: 157; }
+      to { stroke-dashoffset: calc(157 - (157 * var(--progress, 0)) / 100); }
+    }
+
+    /* Tech stack pills */
+    .tech-stack {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .tech-pill {
+      background: rgba(0, 122, 255, 0.1);
+      color: #007aff;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid rgba(0, 122, 255, 0.2);
+    }
+
+    /* Animation delays for stagger effect */
+    .feature-highlight:nth-child(1) { animation-delay: 0.1s; }
+    .feature-highlight:nth-child(2) { animation-delay: 0.2s; }
+    .feature-highlight:nth-child(3) { animation-delay: 0.3s; }
+    .feature-highlight:nth-child(4) { animation-delay: 0.4s; }
+    .feature-highlight:nth-child(5) { animation-delay: 0.5s; }
+    .feature-highlight:nth-child(6) { animation-delay: 0.6s; }
+
+    /* Responsive Design */
+    @media (max-width: 1068px) {
+      .project-features-grid {
+        grid-template-columns: repeat(8, 1fr);
+        gap: 12px;
+        padding: 0 20px;
+      }
+
+      .feature-large {
+        grid-column: span 8;
+        grid-row: span 1;
+      }
+
+      .feature-medium {
+        grid-column: span 4;
+      }
+    }
+
+    @media (max-width: 734px) {
+      .project-features-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        padding: 0 20px;
+      }
+
+      .feature-large,
+      .feature-medium,
+      .feature-wide {
+        grid-column: span 4;
+        grid-row: span 1;
+      }
+
+      .feature-small {
+        grid-column: span 2;
+      }
+
+      .modal-content {
+        width: calc(100vw - 20px);
+        border-radius: 16px;
+      }
+
+      .modal-header {
+        padding: 16px 20px;
+        border-radius: 16px 16px 0 0;
+      }
+
+      .modal-title {
+        font-size: 24px;
+      }
+    }
+
+    /* Demo button */
+    .demo-button {
+      background: #007aff;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      margin: 20px;
+    }
+
+    .demo-button:hover {
+      background: #0056cc;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <button class="demo-button" onclick="openProjectModal()">Open Enhanced Project Modal</button>
+
+  <!-- Enhanced Project Modal -->
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Cloud-Native E-Commerce Platform</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      
+      <!-- Apple-style Features Grid -->
+      <div class="project-features-grid">
+        
+        <!-- Architecture Achievement -->
+        <div class="feature-highlight feature-large bg-containers">
+          <div class="feature-number">80%</div>
+          <div class="feature-title">Image Size Reduction</div>
+          <div class="feature-subtitle">Optimized Docker containers with multi-stage builds and Alpine base images</div>
+          <div class="tech-stack">
+            <span class="tech-pill">Docker</span>
+            <span class="tech-pill">Alpine Linux</span>
+            <span class="tech-pill">Multi-stage</span>
+          </div>
+        </div>
+
+        <!-- Deployment Speed -->
+        <div class="feature-highlight feature-large bg-cicd">
+          <svg class="progress-ring">
+            <circle cx="30" cy="30" r="25" class="progress" style="--progress: 50"></circle>
+          </svg>
+          <div class="feature-number">50%</div>
+          <div class="feature-title">Faster Deployment</div>
+          <div class="feature-subtitle">Parallel processing and optimized CI/CD pipeline</div>
+        </div>
+
+        <!-- Microservices -->
+        <div class="feature-highlight feature-medium bg-automation">
+          <div class="feature-icon">🏗️</div>
+          <div class="feature-title">Microservices</div>
+          <div class="feature-subtitle">Kubernetes-native architecture with service mesh</div>
+        </div>
+
+        <!-- Auto Scaling -->
+        <div class="feature-highlight feature-medium bg-cloud">
+          <div class="feature-icon">📈</div>
+          <div class="feature-title">Auto-Scaling</div>
+          <div class="feature-subtitle">HPA & VPA with custom metrics</div>
+        </div>
+
+        <!-- Monitoring -->
+        <div class="feature-highlight feature-medium bg-monitoring">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title">Observability</div>
+          <div class="feature-subtitle">Prometheus + Grafana + Jaeger tracing</div>
+        </div>
+
+        <!-- High Availability -->
+        <div class="feature-highlight feature-small bg-performance">
+          <div class="feature-number">99.9%</div>
+          <div class="feature-title">Uptime</div>
+        </div>
+
+        <!-- Load Balancing -->
+        <div class="feature-highlight feature-small">
+          <div class="feature-icon">⚖️</div>
+          <div class="feature-title">Load Balancing</div>
+        </div>
+
+        <!-- Security -->
+        <div class="feature-highlight feature-small">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-title">Security</div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="feature-highlight feature-wide">
+          <div>
+            <div class="feature-title">Technology Stack</div>
+            <div class="feature-subtitle">Kubernetes • Docker • Jenkins • GitLab • Helm • Prometheus • Grafana • Istio</div>
+          </div>
+          <div class="feature-icon">⚙️</div>
+        </div>
+
+      </div>
+
+      <!-- Original project content can go here -->
+      <div style="padding: 0 40px 40px;">
+        <h4 style="font-size: 21px; margin-bottom: 16px; color: #1d1d1f;">Project Overview</h4>
+        <p style="font-size: 17px; line-height: 1.5; color: #515154; margin-bottom: 24px;">
+          This cloud-native e-commerce platform demonstrates modern containerization and orchestration practices, 
+          achieving significant improvements in deployment efficiency and resource utilization through advanced DevOps methodologies.
+        </p>
+        
+        <div style="display: flex; gap: 16px; justify-content: center; padding-top: 20px; border-top: 1px solid #e8e8ed;">
+          <a href="#" style="padding: 12px 24px; background: #007aff; color: white; text-decoration: none; border-radius: 12px; font-weight: 500;">
+            View GitHub
+          </a>
+          <a href="#" style="padding: 12px 24px; background: transparent; color: #007aff; text-decoration: none; border-radius: 12px; font-weight: 500; border: 1px solid #007aff;">
+            Live Demo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openProjectModal() {
+      const modal = document.getElementById('projectModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      // Animate features on open
+      setTimeout(() => {
+        document.querySelectorAll('.feature-highlight').forEach((card, index) => {
+          card.style.animation = `slideInScale 0.6s ease-out ${index * 0.1}s both`;
+        });
+      }, 200);
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('projectModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('modal')) {
+        closeModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const activeModal = document.querySelector('.modal.active');
+        if (activeModal) {
+          closeModal();
+        }
+      }
+    });
+
+    // Add slide-in animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideInScale {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Add hover interactions for numbers
+    document.querySelectorAll('.feature-number').forEach(number => {
+      const originalText = number.textContent;
+      const card = number.closest('.feature-highlight');
+      
+      if (originalText.includes('%')) {
+        const numValue = parseInt(originalText);
+        
+        card.addEventListener('mouseenter', () => {
+          let current = 0;
+          const increment = numValue / 20;
+          
+          const animate = () => {
+            current += increment;
+            if (current < numValue) {
+              number.textContent = Math.floor(current) + '%';
+              requestAnimationFrame(animate);
+            } else {
+              number.textContent = originalText;
+            }
+          };
+          animate();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
