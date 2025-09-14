@@ -5,7 +5,7 @@ FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 
 # Copy the HTML file and assets
-COPY trail.html index.html
+COPY new_features_portfolio.html index.html
 COPY images/ ./images/
 COPY assets/ ./assets/
 
