@@ -1,14 +1,6 @@
 # Use the official nginx image as base
 FROM nginx:alpine
 
-# Install locales and UTF-8 support
-RUN apk add --no-cache musl-locales musl-locales-lang
-
-# Set UTF-8 as default locale
-ENV LANG=en_US.UTF-8
-ENV LANGUAGE=en_US:en
-ENV LC_ALL=en_US.UTF-8
-
 # Set working directory
 WORKDIR /usr/share/nginx/html
 
